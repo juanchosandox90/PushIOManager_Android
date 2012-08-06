@@ -5,6 +5,7 @@
 * [Integration Guide](http://docs.push.io/PushIOManager_Android/)
 
 ## Push IO Resources
+* [Home] (http://www.push.io)  
 * [Docs] (http://docs.push.io)  
 * [Support] (http://pushio.zendesk.com)  
 * [Billing] (mailto:sales@push.io?subject=Push IO billing inquiry)  
