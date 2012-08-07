@@ -10,6 +10,7 @@
 * [Support] (http://pushio.zendesk.com)  
 * [Billing] (mailto:sales@push.io?subject=Push IO billing inquiry)  
 * [Sign Up] (https://manage.push.io)  
+* [System Status] (http://status.push.io)
 
 ## IRC Channel
 * #pushio on irc.freenode.net
