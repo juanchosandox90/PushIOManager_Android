@@ -1,7 +1,10 @@
-• Web Oct 18, 2012 - 2.0.4
+* Fri Oct 19, 2012
+- .NOTIFICATIONPRESSED action now passes all of the original push payload data
+
+* Thu Oct 18, 2012
 – Support API level 8 and above
 
-* Web Oct 17, 2012 - 2.0.3	
+* Wed Oct 17, 2012
 - Add custom engagement metric support
 - Initial support for trackers
 - Added a ChangeLog
