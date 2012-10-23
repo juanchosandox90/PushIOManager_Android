@@ -1,3 +1,6 @@
+* Tue Oct 23, 2012 
+- Added a helper to allow programmatic override of api key to support some edge cases
+
 * Fri Oct 19, 2012
 - .NOTIFICATIONPRESSED action now passes all of the original push payload data
 
