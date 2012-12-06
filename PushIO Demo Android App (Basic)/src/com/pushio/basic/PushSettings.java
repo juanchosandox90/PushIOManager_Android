@@ -2,12 +2,18 @@ package com.pushio.basic;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import com.pushio.basic.datasource.DataSource;
 import com.pushio.manager.PushIOManager;
 import com.pushio.manager.tasks.PushIOListener;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -35,6 +41,7 @@ public class PushSettings extends Activity implements PushIOListener {
 	private PushIOManager mPushIOManager; 
 	private ProgressDialog mProgressDialog;
 	private BroadcastReceiver mBroadcastReceiver;
+	private Timer mTimeoutTimer;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -212,19 +219,36 @@ public class PushSettings extends Activity implements PushIOListener {
 		mPushIOManager.resetEID();
 	}
 
+	private class TimeOutTimer extends AsyncTask<String, Void, String> {
+
+		protected void onPostExecute(){
+			onPushIOError("Timeout expired");
+		}
+		
+		@Override
+		protected String doInBackground(String... arg0) {
+			SystemClock.sleep(45000);
+			return null;
+		}
+		
+
+	}
 	private void showProgress(){
 		new ProgressDialog(this);
 		mProgressDialog = ProgressDialog.show(this, "Talking to push.io!", "Just a sec. We're saving your push.io settings.", true );
-
+		
+		new TimeOutTimer().execute("");
 	}
 
 
 	public void onPushIOSuccess() {
+		mTimeoutTimer.cancel();
 		mProgressDialog.dismiss();
 
 
 	}
 	public void onPushIOError(String aMessage) {
+		mTimeoutTimer.cancel();
 		mProgressDialog.dismiss();
 		new AlertDialog.Builder(this).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialogInterface, int i) {
@@ -232,6 +256,6 @@ public class PushSettings extends Activity implements PushIOListener {
 			}
 		}).setTitle("Whoa!").setMessage( aMessage).show();
 	}
-
+	
 
 }
