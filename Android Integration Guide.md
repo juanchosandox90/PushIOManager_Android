@@ -101,34 +101,61 @@ In the Android Manifest under the “application” tag you need to set up the P
 <service android:name="com.pushio.manager.PushIOEngagementService"/>
 ```
 
-### Call ensureRegistration() when the application is first starting. 
-
-This will ensure that registration is maintained between upgrades of the application. 
+### Creating the PushIOManager and PushIOListener
+In any activity that is going to communicate with the PushIO servers, the best practice is to create a PushIOManager object to reuse throughout the activity. The first step, then, is to declare the variable for the class.
 ```java
-PushIOManager pushIOManager =
-new PushIOManager(getApplicationContext(), this, null);
-pushIOManager.ensureRegistration();
+private PushIOManager mPushIOManager;
+```
+When creating a new PushIOManager, the second parameter indicates the class to use to register for the callbacks. In the example below, we will use the current activity to handle the callbacks. Setting this parameter to null will ignore the callbacks and is not recommended.
+```java
+PushIOManager mPushIOManager =
+new PushIOManager(getApplicationContext(), (PushIOListener)this, null);
+```
+At this point, Eclipse should offer to import the PushIOManager library and the PushIOListener library. If you are not using Eclipse or prefer to import the libraries by hand you can add
+```java
+import com.pushio.manager.PushIOManager;
+import com.pushio.manager.tasks.PushIOListener;
+```
+to the import section for your activity.
+
+Also you will update the class to implement the callbacks for the PushIOListener. To do that, we will first indicate that the class implements the PushIOListener callback methods by adding the *implements* argument to the class declaration
+```java
+public class MainActivity extends Activity implements PushIOListener
 ```
 
-### Register with Push IO
+Then we add stubs for the two callback methods
+```java
+public void onPushIOSuccess(){
+  //handle server success
+  }
 
+public void onPushIOError(String aMessage){
+  //handle server error
+  }
+```
+
+### Using the PushIOManager in an Activity
+All of the examples below assume that the mPushIOManager variable was created using the method described in the previous section.
+#### Call ensureRegistration() when the application is first starting. 
+This will ensure that registration is maintained between upgrades of the application. A common location to place the call is from the onCreate method of the main activity.
+```java
+mPushIOManager.ensureRegistration();
+```
+ 
+ #### Register with Push IO
 You can register a device with Push IO one of two ways. First, if your application gives users a way to specify a preference or favorite, you may want to register for that category you can you push to them relevant content. Note that the PushIOManager has two callbacks that can be optionally implemented that allow you to deal with success and errors. Additionally success and error is logged under the “pushio” tag.
 
 This kind of registration would be tied to a notification UI, allowing the user to select categories.
 
 ```java
 // Register for US and World Headlines
-PushIOManager pushIOManager =
-new PushIOManager(getApplicationContext(), this, null);
 List<String> categories = new ArrayList<String>();
 categories.add("US");
 categories.add("World");
-pushIOManager.registerCategories( categories, false );
+mPushIOManager.registerCategories( categories, false );
 ```
 ```java
 // Unregister for US Headlines
-PushIOManager pushIOManager =
-new PushIOManager(getApplicationContext(), this, null);
 List<String> categories = new ArrayList<String>();
 categories.add("US");
 pushIOManager.unregisterCategories( categories, false );
@@ -137,27 +164,20 @@ If you just want to be able to broadcast to all your users without using categor
 
 ```java
 //Register for broadcast without categories
-PushIOManager pushIOManager =
-new PushIOManager(getApplicationContext(),this,null);
-pushIOManager.registerCategories(null,false);
+mPushIOManager.registerCategories(null,false);
 ```
 
 To unregister a device call unregisterDevice.
 ```java
 // Unregister device
-PushIOManager pushIOManager =
-new PushIOManager(getApplicationContext(), this, null);
-pushIOManager.unregisterDevice();
+mPushIOManager.unregisterDevice();
 ```
 
 you can optionally unregister them from all categories depending on your UI. If they are required to reselect categories the next time they turn on notifications, then remove all of their categories
 ```java
 // Removing all categories
-PushIOManager pushIOManager =
-new PushIOManager(getApplicationContext(),this, null);
-pushIOManager.unregisterAllCategories();
+mPushIOManager.unregisterAllCategories();
 ```
-
 ### Handle Push
 
 In Android push notifications are broadcast using the action “com.example.PUSHIOPUSH”, if you don’t handle this broadcast the Push IO Manager will create a standard notification for you (using the badge name and sound name to to gather the proper resources from your application assets. If you don’t need anything fancy you can skip this section and move down to “Handling Push Intents”.
