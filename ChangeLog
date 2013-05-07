@@ -1,3 +1,7 @@
+* Tue May 7, 2013
+- Increased the Google Cloud Messaging registration timeout
+- Changed Async Tasks to use "THREAD_POOL_EXECUTOR" in Android 3.0 and above
+
 * Tue Oct 23, 2012 
 - Added a helper to allow programmatic override of api key to support some edge cases
 
