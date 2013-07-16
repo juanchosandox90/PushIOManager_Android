@@ -1,3 +1,6 @@
+* Tue July 16th, 2013 - 2.9.1
+- Fixed stability issues when calling the Push IO Manager from a background thread. 
+
 * Mon July 15th, 2013 - 2.9.0
 -The Push IO Manager is now a singleton, called through PushIOManager.getInstance()
 -Registrations are now queued and processed in a batch to prevent race conditions when registering\unregistering categories in quick succession. 
