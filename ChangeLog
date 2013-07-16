@@ -1,3 +1,9 @@
+* Mon July 15th, 2013 - 2.9.0
+-The Push IO Manager is now a singleton, called through PushIOManager.getInstance()
+-Registrations are now queued and processed in a batch to prevent race conditions when registering\unregistering categories in quick succession. 
+-New analytics information is now sent with registrations
+-Fixed a stability issue with the PushIOActivityLauncher
+
 * Tue May 7, 2013
 - Increased the Google Cloud Messaging registration timeout
 - Changed Async Tasks to use "THREAD_POOL_EXECUTOR" in Android 3.0 and above

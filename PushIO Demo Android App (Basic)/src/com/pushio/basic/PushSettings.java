@@ -1,151 +1,58 @@
 package com.pushio.basic;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import com.pushio.basic.datasource.DataSource;
-import com.pushio.manager.PushIOManager;
-import com.pushio.manager.tasks.PushIOListener;
-
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.os.SystemClock;
-import android.preference.PreferenceManager;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-import android.content.res.Configuration;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.CheckBox;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
+import com.pushio.manager.PushIOManager;
 
-public class PushSettings extends Activity implements PushIOListener {
+import java.util.ArrayList;
+import java.util.List;
 
-	private ListView mListView;
-	private PushIOManager mPushIOManager; 
-	private ProgressDialog mProgressDialog;
+public class PushSettings extends Activity {
+    private static String PUSH_CATEGORY_ENABLE_PUSH = "enable_push";
+    private static String PUSH_CATEGORY_US = "US";
+    private static String PUSH_CATEGORY_SPORTS = "Sports";
+
+    private static String PUSH_KEY_ALERT = "alert";
+
+	private PushIOManager mPushIOManager;
 	private BroadcastReceiver mBroadcastReceiver;
-	private Timer mTimeoutTimer;
+    private List<View> mSettingViewList;
+    private TextView mPushText;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_push_settings);
-		mPushIOManager = new PushIOManager(getApplicationContext(), (PushIOListener) this, null);
+
+        mPushText = (TextView)findViewById(R.id.pushText);
+
+        //Checking to see if this activity was created by a user engaging with a notification
+        if (getIntent().hasExtra(PUSH_KEY_ALERT)) {
+            //Since they did engage with a notification we can grab anything from the payload, for this simple case, let's display the text from the last alert.
+    mPushText.setText("Last Push: " + getIntent().getStringExtra(PUSH_KEY_ALERT));
+        }
+
+        mSettingViewList = new ArrayList<View>();
+        //Grab or great the instance of the Push IO Manager
+        mPushIOManager = PushIOManager.getInstance(this);
+        //ensure that any registration changes with Google get reflected with Push IO
 		mPushIOManager.ensureRegistration();
 
+        View pushEnabledSetting = findViewById(R.id.push_setting_enabled);
+        View usSetting = findViewById(R.id.push_setting_us);
+        View sportsSetting = findViewById(R.id.push_setting_sports);
 
-		mListView = (ListView) findViewById(R.id.settingsList);
-		mListView.setAdapter(new SettingsAdapter(this));
-		//Storing the value of the three CheckBoxes in the DefaultSharedPreferences
-		SharedPreferences mSettings = PreferenceManager.getDefaultSharedPreferences(this);
-		final Editor mEditor = mSettings.edit();
-		final Context mContext = this;
-
-
-
-		mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-			public void onItemClick(AdapterView<?> parent, View thisView, int position,
-					long arg3) {
-				
-				//Find the CheckBox from within the ListView Row
-				CheckBox mCheck = (CheckBox) thisView.findViewById(R.list.checkBox);
-				mCheck.setChecked(!mCheck.isChecked());
-
-				//Show the Progress Alert
-				showProgress();
-
-				switch(position) {
-				case 0: { //The check to turn on or off the Notifications in General
-					//First, we save the check value in the DefaultSettings
-					mEditor.putBoolean(mContext.getString(R.string.notification_preference_key),mCheck.isChecked());
-
-					if	(mCheck.isChecked()){
-						//They checked the box to turn on notifications, so register the device by registering for an empty category
-						mPushIOManager.registerCategories(null, false);
-					} else {
-						//They are turning off the notifications
-
-						//Save the check values in the DefaultSettings to false so they will get turned off
-						mEditor.putBoolean(mContext.getString(R.string.us_news_preference_key),false);
-						mEditor.putBoolean(mContext.getString(R.string.sports_preference_key),false);
-
-						//Tell the server to unregister all categories
-						mPushIOManager.unregisterAllCategories();
-						// Unregister  the device
-						mPushIOManager.unregisterDevice();
-					}
-					break;
-				}
-				case 1: {
-
-					//Update the DefaultSettings with the new value for the CheckBox
-					mEditor.putBoolean(mContext.getString(R.string.us_news_preference_key),mCheck.isChecked());
-
-					//Create a key to pass to the pushIO server in the proper format
-					List<String>lTags = new ArrayList<String>();
-					lTags.add(mContext.getString(R.string.us_news_preference_key));
-
-					if (mCheck.isChecked()) {
-						//They checked the box, so register the category with the server
-						mPushIOManager.registerCategories(lTags, false);
-					} else {
-						//They unchecked the box, so unregister the category with the server
-						mPushIOManager.unregisterCategories(lTags);
-					}
-					break;
-				}
-				case 2: {
-
-					//Update the DefaultSettings with the new value for the CheckBox
-					mEditor.putBoolean(mContext.getString(R.string.sports_preference_key),mCheck.isChecked());
-
-					//Create a key to pass to the pushIO server in the proper format
-					List<String>lTags = new ArrayList<String>();
-					lTags.add(mContext.getString(R.string.sports_preference_key));
-
-					if (mCheck.isChecked()) {
-						//They checked the box, so register the category with the server
-						mPushIOManager.registerCategories(lTags, false);
-					} else {
-						//They unchecked the box, so unregister the category with the server
-						mPushIOManager.unregisterCategories(lTags);
-					}
-					break;
-				}
-				}
-				//We have updated the DefaultSettings, so save our changes
-				mEditor.commit();
-
-				//We now need to update the DataSource 
-				DataSource localDataSource = DataSource.getDataSourceInstance(mContext);
-				localDataSource.getmSettingsData().get(position).setmChecked(mCheck.isChecked());
-
-				//Tell the SettingsAdapter to refresh itself with the updated DataSource
-				SettingsAdapter adapter = (SettingsAdapter) parent.getAdapter();
-				adapter.notifyDataSetChanged();
-
-
-			}
-
-		});
+        setupSettingsView(pushEnabledSetting, PUSH_CATEGORY_ENABLE_PUSH, "Enable Push?", "This will enable push notifications");
+        setupSettingsView(usSetting, PUSH_CATEGORY_US, "US News", "Registers the category for US News");
+        setupSettingsView(sportsSetting, PUSH_CATEGORY_SPORTS, "Sports", "Registers the category for Sports");
 	}
 
 
@@ -153,12 +60,8 @@ public class PushSettings extends Activity implements PushIOListener {
 	@Override
 	public void onResume() {
 		super.onResume();
-		//When the activity is resumed, update the SettingsAdapter list with any changed Data
-		SettingsAdapter adapter = (SettingsAdapter) mListView.getAdapter();
-		adapter.notifyDataSetChanged();
 
-		//With the activity starts, we want to handle any received pushes instead of letting the Notification
-		//Service handle them.
+        //If the user has the app open we don't want to add a notification, instead we will handle the push in-app.
 		mBroadcastReceiver = new BroadcastReceiver() {
 			@Override
 			/**
@@ -167,37 +70,103 @@ public class PushSettings extends Activity implements PushIOListener {
 			 * 
 			 */
 			public void onReceive(Context context, Intent intent) {
-				
-				String alert = intent.getStringExtra("alert");
+                //Creating a simple toast to show the user the alert message
+				String alert = intent.getStringExtra(PUSH_KEY_ALERT);
 				Toast.makeText(context, alert, Toast.LENGTH_LONG).show();
-				TextView mPushText = (TextView)findViewById(R.id.pushText);
-				mPushText.setText(intent.getStringExtra("details"));
-				
+
+                //We can also take this opportunity to update any parts of the view with parts of the push payload...
+				mPushText.setText("Last Push: " + intent.getStringExtra(PUSH_KEY_ALERT));
+
+                //Or you could kick of another update from here...
+
+
+                //These lines tell the push io manager NOT to create a notification for you, because you are handing it in-app.
+                //This will also track an in-app engagement.
 				Bundle extras = getResultExtras(true);
-				//Pass the extras along to the PushIOManager so that they can be registered with
-				//the server
 				extras.putInt(PushIOManager.PUSH_STATUS, PushIOManager.PUSH_HANDLED_IN_APP);
 				setResultExtras(extras);
-				//Because we have handled the push, don't let it go to the Notification Center
 				this.abortBroadcast();
 			}
 
 		};
-		registerReceiver( mBroadcastReceiver, new IntentFilter("com.pushio.basic.PUSHIOPUSH") );
+
+        //This registers the receiver with android, for the app namespace plus the keywork "PUSHIOPUSH", in your app replace the com.pushio.basic with your app namespace
+		registerReceiver(mBroadcastReceiver, new IntentFilter("com.pushio.basic.PUSHIOPUSH"));
 	}
+
+
+    private void setupSettingsView(View view, final String category, String settingTitle, String settingDetail) {
+        TextView title = (TextView)view.findViewById(R.id.title_view);
+        title.setText(settingTitle);
+
+        TextView detailView = (TextView)view.findViewById(R.id.detail_view);
+        detailView.setText(settingDetail);
+
+        final CheckBox checkBox = (CheckBox)view.findViewById(R.id.check_box);
+
+        if (category.equals("enable_push")) {
+            checkBox.setChecked(mPushIOManager.getIsBroadcastRegistered());
+
+            checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (checkBox.isChecked()) {
+                        //Register a null category to just for broadcasts,
+                        // if you have any default categories this would be a good place to register them
+                        mPushIOManager.registerCategory(null);
+                        for (View settingView : mSettingViewList) {
+                            settingView.setVisibility(View.VISIBLE);
+                            ((CheckBox)settingView.findViewById(R.id.check_box)).setChecked(false);
+                        }
+
+                    } else {
+                        for (View settingView : mSettingViewList) {
+                            settingView.setVisibility(View.GONE);
+                        }
+                        mPushIOManager.unregisterDevice();
+                    }
+                }
+            });
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    checkBox.setChecked(!checkBox.isChecked());
+                }
+            });
+        } else {
+            //Ask the push io manager if the category is registered or not
+            mSettingViewList.add(view);
+            checkBox.setChecked(mPushIOManager.getRegisteredCategories().contains(category));
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                            if (checkBox.isChecked()) {
+                                mPushIOManager.registerCategory(category);
+                            } else {
+                                mPushIOManager.unregisterCategory(category);
+                            }
+                        }
+                    });
+
+                    checkBox.setChecked(!checkBox.isChecked());
+                }
+            });
+        }
+
+
+
+    }
 
 	@Override
 	public void onPause(){
 		super.onPause();
-
+        //unregister the broadcast receiver when the user leaves the activity so the push io manager creates notifications.
 		unregisterReceiver(mBroadcastReceiver);
-	}
-
-	@Override
-	public void onConfigurationChanged(Configuration newConfig) {
-		super.onConfigurationChanged(newConfig);
-		SettingsAdapter localAdapter = (SettingsAdapter) mListView.getAdapter();
-		localAdapter.notifyDataSetChanged();
 	}
 
 	@Override
@@ -218,44 +187,4 @@ public class PushSettings extends Activity implements PushIOListener {
 		super.onStop();
 		mPushIOManager.resetEID();
 	}
-
-	private class TimeOutTimer extends AsyncTask<String, Void, String> {
-
-		protected void onPostExecute(){
-			onPushIOError("Timeout expired");
-		}
-		
-		@Override
-		protected String doInBackground(String... arg0) {
-			SystemClock.sleep(45000);
-			return null;
-		}
-		
-
-	}
-	private void showProgress(){
-		new ProgressDialog(this);
-		mProgressDialog = ProgressDialog.show(this, "Talking to push.io!", "Just a sec. We're saving your push.io settings.", true );
-		
-		new TimeOutTimer().execute("");
-	}
-
-
-	public void onPushIOSuccess() {
-		mTimeoutTimer.cancel();
-		mProgressDialog.dismiss();
-
-
-	}
-	public void onPushIOError(String aMessage) {
-		mTimeoutTimer.cancel();
-		mProgressDialog.dismiss();
-		new AlertDialog.Builder(this).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialogInterface, int i) {
-				dialogInterface.dismiss();
-			}
-		}).setTitle("Whoa!").setMessage( aMessage).show();
-	}
-	
-
 }

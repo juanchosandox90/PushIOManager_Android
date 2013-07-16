@@ -18,22 +18,15 @@
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
-		</activity>
-		<activity android:name=".AboutThisApp">
-			<!-- This filter will cause this activity to be launched by tapping on 
-				the Notification in the Notification Center -->
-			<intent-filter>
-				<action android:name="com.pushio.basic.NOTIFICATIONPRESSED" />
-				<category android:name="android.intent.category.DEFAULT" />
-			</intent-filter>
-		</activity>
-		  
-		<receiver android:name="com.pushio.basic.NotificationBroadcastReceiver">
+
             <intent-filter>
-                <action  android:name="com.pushio.basic.PUSHIOPUSH"/>
+                <action android:name="com.pushio.basic.NOTIFICATIONPRESSED" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </receiver> 
+
+        </activity>
+		<activity android:name=".AboutThisApp"/>
+
 		<receiver android:name="com.pushio.manager.PushIOBroadcastReceiver"
 			android:permission="com.google.android.c2dm.permission.SEND">
 			<intent-filter>

@@ -3,20 +3,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
+    <include layout="@layout/push_settings_item"
+             android:id="@+id/push_setting_enabled"/>
 
-    <ListView
-        android:id="@+id/settingsList"
-        android:layout_width="match_parent"
-        android:layout_height="207dp" >
+    <include layout="@layout/push_settings_item"
+             android:id="@+id/push_setting_us"/>
 
-    </ListView>
+    <include layout="@layout/push_settings_item"
+             android:id="@+id/push_setting_sports"/>
+
+
 
     <TextView
         android:id="@+id/pushText"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-       />
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>
