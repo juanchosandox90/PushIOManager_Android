@@ -1,3 +1,10 @@
+* Thur July 18th, 2013 - 2.9.2
+- setDefaultSmallIcon() and setDefaultLargeIcon() can now be set for Push IO generated notifications
+- Fixed blank notifications causing a crash
+- Push IO generated notifications will now use the application label for the title, if more than one line is included in the message the first line will now be used as the title
+- Push IO generated notification now use the application icon if no icon is defined.
+- Fixed activities launched through the activity launcher leaving a back stack.
+
 * Tue July 16th, 2013 - 2.9.1
 - Fixed stability issues when calling the Push IO Manager from a background thread. 
 
