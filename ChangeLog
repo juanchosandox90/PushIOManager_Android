@@ -1,6 +1,8 @@
+* Thu Sept 26, 2013 - 2.10.0
+- Additional metadata fields added to registrations.
 * Mon Sept 16, 2013 - 2.9.4
 - Changes for baked in notifications:
-  - If no sound is sent, we now use the system default sound 
+  - If no sound is sent, we now use the system default sound
   - Fixed the uri used for sounds sent in the push payload.
 
 * Thur July 18th, 2013 - 2.9.2
@@ -11,11 +13,11 @@
 - Fixed activities launched through the activity launcher leaving a back stack.
 
 * Tue July 16th, 2013 - 2.9.1
-- Fixed stability issues when calling the Push IO Manager from a background thread. 
+- Fixed stability issues when calling the Push IO Manager from a background thread.
 
 * Mon July 15th, 2013 - 2.9.0
 -The Push IO Manager is now a singleton, called through PushIOManager.getInstance()
--Registrations are now queued and processed in a batch to prevent race conditions when registering\unregistering categories in quick succession. 
+-Registrations are now queued and processed in a batch to prevent race conditions when registering\unregistering categories in quick succession.
 -New analytics information is now sent with registrations
 -Fixed a stability issue with the PushIOActivityLauncher
 
@@ -23,7 +25,7 @@
 - Increased the Google Cloud Messaging registration timeout
 - Changed Async Tasks to use "THREAD_POOL_EXECUTOR" in Android 3.0 and above
 
-* Tue Oct 23, 2012 
+* Tue Oct 23, 2012
 - Added a helper to allow programmatic override of api key to support some edge cases
 
 * Fri Oct 19, 2012
