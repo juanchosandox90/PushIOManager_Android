@@ -1,5 +1,6 @@
 * Thu Sept 26, 2013 - 2.10.0
 - Additional metadata fields added to registrations.
+
 * Mon Sept 16, 2013 - 2.9.4
 - Changes for baked in notifications:
   - If no sound is sent, we now use the system default sound
