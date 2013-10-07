@@ -1,3 +1,7 @@
+* Mon Oct 7, 2013 - 2.10.1
+- Added isCurrentSessionAnEngagement() 
+- Fixed stability issue when using built-in notification on ICS devices. 
+
 * Thu Sept 26, 2013 - 2.10.0
 - Additional metadata fields added to registrations.
 
