@@ -1,3 +1,6 @@
+* Tue Feb 4, 2014 - 2.10.4
+-Added setting to turn off stacked built-in notifications, set using: setNotificationsStacked(false) 
+
 * Mon Oct 23, 2013 - 2.10.3
 - Fixed wake lock under-lock issue when a push is received on low-memory devices.  
 
