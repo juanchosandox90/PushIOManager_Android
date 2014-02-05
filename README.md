@@ -1,6 +1,6 @@
 ## PushIOManager for Android 
 
-* [Integration Guide](https://pushio.zendesk.com/entries/24866706-Step-By-Step-Push-IO-Setup-Instructions-Android-)
+* [Integration Guide](http://docs.push.io)
 
 ## Other Resources
 * [Downloads + Documenation] (http://docs.push.io)
