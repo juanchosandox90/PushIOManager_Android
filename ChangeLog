@@ -1,3 +1,6 @@
+* Fri Nov 14, 2014 - 2.10.6
+- Replaced Notification APIs deprecated in Android 5.0.
+
 * Mon Oct 20, 2014 - 2.10.5
 - Fixed an issue when registering with GCM on Android 5.0.
 
