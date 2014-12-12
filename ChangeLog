@@ -1,3 +1,6 @@
+* Wed Dec 10, 2014 - 2.10.7
+- Fixed issue with listeners not being registered.
+
 * Fri Nov 14, 2014 - 2.10.6
 - Replaced Notification APIs deprecated in Android 5.0.
 
