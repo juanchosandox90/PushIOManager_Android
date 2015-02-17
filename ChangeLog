@@ -3,7 +3,7 @@
 - Fixed issue with GCM registration on 5.x devices.
 
 * Mon Feb 16, 2015 - 2.11.0
-- NOTE: Please read the docs before upgrading to this version, as it requires modifications to the integration code
+- NOTE: Please read the docs (https://docs.pushio.com/Android/Step-By-Step_Setup_Instructions) before upgrading to this version, as it requires modifications to the integration code
 - Fixed issue with false GCM detection in Amazon FireOS 4.5.x.
 - Added check for permission PUSHIO_MESSAGE.
 - Fixed force close when retrying registration in Airplane mode on 5.x.
