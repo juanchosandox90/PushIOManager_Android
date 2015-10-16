@@ -1,3 +1,7 @@
+* Fri October 16, 2015 - 2.13.3
+- Fixed issue with PushIOManager.ensureRegistration() not initiating registration.
+- Fixed issue with engagement reporting for payload with “p_dl” key.
+
 * Mon August 17, 2015 - 2.13.2
 - Fixed issue with PushIOManager.getPreferences() returning non-preference data.
 
