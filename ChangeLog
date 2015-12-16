@@ -1,3 +1,7 @@
+* Wed December 16, 2015 - 2.13.4
+- Fixed issue with HTTP links not being correctly broadcast.
+- Fixed NPE when wakelock is released after reporting engagement.
+
 * Fri October 16, 2015 - 2.13.3
 - Fixed issue with PushIOManager.ensureRegistration() not initiating registration.
 - Fixed issue with engagement reporting for payload with “p_dl” key.
