@@ -1,3 +1,9 @@
+* Mon April 4, 2016 - 2.13.5
+- Added compatibility for ADMv2.
+- Fixed app build error due to conflicting "android:label" attribute declared in the SDK manifest.
+- Fixed issue with registration ID from InstanceID service being reported as token.
+- Fixed issue with message popup being auto-closed due to Activity switch.
+
 * Wed December 16, 2015 - 2.13.4
 - Fixed issue with HTTP links not being correctly broadcast.
 - Fixed NPE when wakelock is released after reporting engagement.
