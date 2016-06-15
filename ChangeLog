@@ -1,3 +1,7 @@
+* Wed June 15, 2016 - 2.13.6
+- Added additional checks for GCM broadcasts.
+- Fixed NPE when a push message is received with image and without text.
+
 * Mon April 4, 2016 - 2.13.5
 - Added compatibility for ADMv2.
 - Fixed app build error due to conflicting "android:label" attribute declared in the SDK manifest.
