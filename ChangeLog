@@ -1,3 +1,9 @@
+* Mon August 22, 2016 - 6.29.0
+- Support for Responsys Interact 6.29 Push.
+- Added additional checks for rich push message view type.
+- Fixed issue with activity launched from hyperlink in a rich push message not showing in Android Recent Apps.
+- Fixed issue with device not being unregistered if app is closed before a successful unregistration.
+
 * Thu August 11, 2016 - 2.13.7
 - Added additional checks for rich push message view type.
 - Fixed issue with Activity launched from hyperlink in a rich push message not showing in Recent Apps.
