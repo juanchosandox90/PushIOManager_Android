@@ -1,3 +1,11 @@
+* Mon March 6, 2017 - 6.31
+- Fixed issue with UTF-8 encoding in rich push and in-app message.
+- Fixed issue with accuracy of numeric Preferences while sending to backend.
+- Fixed issue with URL redirection in rich push and in-app message.
+- Fixed issue with special characters in userID.
+- Updated GCM integration.
+- Support for Responsys Interact Message Center.
+
 * Wed August 31, 2016 - 6.29.1
 - Fixed issue with pushio_config.json file not being detected on first app launch.
 
