@@ -14,7 +14,7 @@
     }
 ```
 #### GCM Update
-- The internal GCM implementation has been updated to not conflict with other libraries using GCM within your app. As part of this change, you are required to declare the following services under `<application>` tag in the AndroidManifest.xml file.
+- The internal GCM implementation has been updated to not conflict with other libraries using GCM within your app. As part of this change, you are required to declare the following services under the `<application>` tag in the AndroidManifest.xml file.
 ```xml
    <application>
     <service android:name="com.pushio.manager.PIOGCMRegistrationIntentService"
