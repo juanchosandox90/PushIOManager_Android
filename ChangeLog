@@ -1,4 +1,5 @@
 * Mon March 6, 2017 - 6.31
+- NOTE: Please read through the Release Notes (https://github.com/pushio/PushIOManager_Android) before integrating this new version of the SDK.
 - Fixed issue with UTF-8 encoding in rich push and in-app message.
 - Fixed issue with accuracy of numeric Preferences while sending to backend.
 - Fixed issue with URL redirection in rich push and in-app message.
