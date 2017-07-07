@@ -1,3 +1,9 @@
+* Fri July 7, 2017 - 6.32
+- Fixed an issue with multi-line notification style.
+- Fixed an issue with saving Preferences.
+- Fixed an issue with In-App message popup window.
+- `PushIOManager.registerUserId( )` no longer throws `IllegalArgumentException`.
+
 * Mon March 6, 2017 - 6.31
 - Fixed issue with UTF-8 encoding in rich push and in-app message.
 - Fixed issue with accuracy of numeric Preferences while sending to backend.
