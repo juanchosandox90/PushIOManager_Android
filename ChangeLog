@@ -1,3 +1,7 @@
+* Mon September 11, 2017 - 6.33
+- New APIs for controlling PushIO SDK logging.
+- Runtime Location permission prompt is now shown for devices running Android Marshmallow and above.
+
 * Fri July 7, 2017 - 6.32
 - Fixed an issue with multi-line notification style.
 - Fixed an issue with saving Preferences.
@@ -5,7 +9,6 @@
 - `PushIOManager.registerUserId( )` no longer throws `IllegalArgumentException`.
 
 * Mon March 6, 2017 - 6.31
-- NOTE: Please read through the Release Notes (https://github.com/pushio/PushIOManager_Android/blob/master/README.md#release-notes) before integrating this new version of the SDK.
 - Fixed issue with UTF-8 encoding in rich push and in-app message.
 - Fixed issue with accuracy of numeric Preferences while sending to backend.
 - Fixed issue with URL redirection in rich push and in-app message.
@@ -37,7 +40,7 @@
 - Fixed issue with registration ID from InstanceID service being reported as token.
 - Fixed issue with message popup being auto-closed due to Activity switch.
 
-* Wed December 16, 2015 - 2.13.4
+* Tue December 15, 2015 - 2.13.4
 - Fixed issue with HTTP links not being correctly broadcast.
 - Fixed NPE when wakelock is released after reporting engagement.
 
