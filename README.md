@@ -3,6 +3,23 @@
 * [Integration Guide](http://docs.push.io)
 
 ## Release Notes
+
+### Upgrading PushIO SDK 6.31/6.32 to 6.33
+#### Minimum Android SDK Version
+PushIO SDK now requires a minimum Android SDK version of 16. Update the module-level **`build.gradle`** file as follows:
+
+```
+android {
+    defaultConfig {
+        minSdkVersion 16
+    }
+}
+```
+ 
+#### Runtime Permissions
+Requesting device location shows a prompt at runtime for apps targeting Android Marshmallow (API 23) and above. See [Permissions](https://developer.android.com/preview/features/runtime-permissions.html) for more details.
+
+
 ### Upgrading PushIO SDK 6.29.1 to 6.31
 #### Minimum Android SDK Version 
 - PushIO SDK now requires minimum SDK version of 14 (Ice Cream Sandwich). So remember to update your modules' `build.gradle` file,
