@@ -1,3 +1,8 @@
+* Wed November 15, 2017 - 6.33.1
+- Support for Android 8.
+- New API for toggling use of location data during registration with Responsys Interact backend.
+- Fixed issue with the visibility of a few existing APIs related to setting notification icons.
+
 * Mon September 11, 2017 - 6.33
 - New APIs for controlling PushIO SDK logging.
 - Runtime Location permission prompt is now shown for devices running Android Marshmallow and above.
