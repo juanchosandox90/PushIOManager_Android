@@ -4,6 +4,19 @@
 
 ## Release Notes
 
+### Upgrading PushIO SDK 6.31/6.32/6.33 to 6.33.1
+#### New API for Registration
+With the release of 6.33.1, we have added a new API for registration. 
+
+```
+PushIOManager.getInstance(this).registerApp( boolean useLocation );
+```
+
+The existing API for registration - `PushIOManager.registerApp()` brings up a modal prompt for requesting location access, which may not be suitable for all the apps. With the new API, it is now possible to do a PushIO registration without location data. This might be useful in a scenario where your app would like to defer the request for location. 
+
+If you do a PushIO registration without location data, it is recommended to also do a PushIO registration with location data at a later stage when your app is ready to request location access.
+
+
 ### Upgrading PushIO SDK 6.31/6.32 to 6.33
 #### Minimum Android SDK Version
 PushIO SDK now requires a minimum Android SDK version of 16. Update the module-level **`build.gradle`** file as follows:
