@@ -4,7 +4,7 @@
 
 ## Release Notes
 
-### Upgrading PushIO SDK 6.31/6.32/6.33 to 6.33.1
+### Upgrading PushIO SDK 6.33 to 6.33.1
 #### New API for Registration
 With the release of 6.33.1, we have added a new API for registration. 
 
