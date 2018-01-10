@@ -4,6 +4,20 @@
 
 ## Release Notes
 
+### Upgrading PushIO SDK 6.33.1 to 6.33.2
+#### Changes in APIs for Registration
+With the release of 6.33.2, we have modified the following registration API methods,
+```
+PushIOManager.getInstance(this).registerApp();
+
+PushIOManager.getInstance(this).registerApp( boolean useLocation );
+```
+
+As with the previous release, the API - `PushIOManager.registerApp()` brings up a modal prompt at runtime for requesting location access. 
+
+If you would like to defer requesting the location access to a later stage, you should use the new API - `PushIOManager.registerApp( boolean useLocation )`. The `boolean` parameter value here is persisted and subsequent registration calls to Responsys backend (for ex. via `registerApp()` or `registerUserId()`) use this value to check if location access is to be requested.
+
+
 ### Upgrading PushIO SDK 6.33 to 6.33.1
 #### New API for Registration
 With the release of 6.33.1, we have added a new API for registration. 
