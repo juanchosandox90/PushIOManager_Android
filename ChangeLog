@@ -1,3 +1,7 @@
+* Wed January 10, 2018 - 6.33.2
+- Fixed issue with runtime permission prompt.
+- Fixed issue with registration APIs not persisting the choice of using location while registering with Responsys Interact backend.
+
 * Wed November 15, 2017 - 6.33.1
 - Support for Android 8.
 - New API for toggling use of location data during registration with Responsys Interact backend.
