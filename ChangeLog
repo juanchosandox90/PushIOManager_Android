@@ -1,3 +1,7 @@
+* Mon March 12, 2018 - 6.35
+- Support for Interactive Notifications.
+- Improved handling of Responsys Link Tracking links (see https://docs.oracle.com/cloud/latest/marketingcs_gs/OMCFB/android/link-ux/).
+
 * Wed January 10, 2018 - 6.33.2
 - Fixed issue with runtime permission prompt.
 - Fixed issue with registration APIs not persisting the choice of using location while registering with Responsys Interact backend.
