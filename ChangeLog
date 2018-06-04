@@ -1,3 +1,7 @@
+* Mon June 4, 2018 - 6.37
+- Added new API to Message Center for retrieving rich content.
+- Added new API to maintain engagement/conversion sessions.
+
 * Mon April 9, 2018 - 6.35.1
 - Fixed issue with managing SDK's local data storage.
 - Fixed issue with the In-App message popup window.
