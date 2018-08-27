@@ -4,6 +4,14 @@
 
 ## Release Notes
 
+### Upgrading SDK to 6.38
+#### New API for SDK Crash Reporting
+With the release of 6.38, we have introduced a new feature to report all SDK-related (internal) crash/issues back to Responsys. This feature is enabled by default. The following API can be used to toggle this feature,
+
+```java
+PushIOManager.getInstance(this).setCrashLoggingEnabled(true);
+```
+
 ### Upgrading PushIO SDK 6.33.1 to 6.33.2
 #### Changes in APIs for Registration
 With the release of 6.33.2, we have modified the following registration API methods,
