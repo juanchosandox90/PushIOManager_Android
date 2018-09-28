@@ -1,3 +1,7 @@
+* Fri September 28, 2018 - 6.38.1
+- Added support for FCM (see https://github.com/pushio/PushIOManager_Android/blob/master/README.md)
+- Fixed issue with In-App message window force-close in some cases.
+
 * Mon August 27, 2018 - 6.38
 - Added SDK crash reporting feature (see https://github.com/pushio/PushIOManager_Android/blob/master/README.md#upgrading-sdk-to-638)
 - Additional default notification buttons added.

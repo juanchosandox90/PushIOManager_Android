@@ -4,6 +4,17 @@
 
 ## Release Notes
 
+### Upgrading SDK to 6.38.1
+#### Support for FCM
+With the release of 6.38.1, the SDK is compatible with FCM (Firebase Cloud Messaging). If you wish to use FCM libraries in your app, it is recommended that you remove the GCM library dependency and vice-versa.
+
+```
+dependencies {
+	// implementation 'com.google.android.gms:play-services-gcm:15.0.1'
+	implementation 'com.google.firebase:firebase-messaging:17.3.2'
+}
+``` 
+
 ### Upgrading SDK to 6.38
 #### New API for SDK Crash Reporting
 With the release of 6.38, we have introduced a new feature to report all SDK-related (internal) crash/issues back to Responsys. This feature is enabled by default. The following API can be used to toggle this feature,
