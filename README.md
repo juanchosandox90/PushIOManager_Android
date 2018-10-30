@@ -4,6 +4,17 @@
 
 ## Release Notes
 
+### Upgrading SDK to 6.39
+#### New API for In-App Messaging
+With the release of 6.39, we have introduced a new API to fetch In-App Messages at app launch. Once you turn-on this feature in Responsys Interact, you should use the below API to enable this feature in the SDK. 
+
+```java
+PushIOManager.getInstance(this).setInAppFetchEnabled(true);
+``` 
+
+Thereafter, the In-App messages shall be delivered to the app via a pull-based mechanism.
+
+
 ### Upgrading SDK to 6.38.1
 #### Support for FCM
 With the release of 6.38.1, the SDK is compatible with FCM (Firebase Cloud Messaging). If you wish to use FCM libraries in your app, it is recommended that you remove the GCM library dependency and vice-versa.
@@ -11,7 +22,7 @@ With the release of 6.38.1, the SDK is compatible with FCM (Firebase Cloud Messa
 ```
 dependencies {
 	// implementation 'com.google.android.gms:play-services-gcm:15.0.1'
-	implementation 'com.google.firebase:firebase-messaging:17.3.2'
+	implementation 'com.google.firebase:firebase-messaging:17.3.4'
 }
 ``` 
 
