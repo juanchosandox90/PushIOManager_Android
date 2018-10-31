@@ -14,6 +14,9 @@ PushIOManager.getInstance(this).setInAppFetchEnabled(true);
 
 Thereafter, the In-App messages shall be delivered to the app via a pull-based mechanism.
 
+##### Recommendation
+For any new In-App message implementation or upgrade to 6.39, we strongly recommend enabling this feature both in the SDK and for your Account at Responsys.
+
 
 ### Upgrading SDK to 6.38.1
 #### Support for FCM
