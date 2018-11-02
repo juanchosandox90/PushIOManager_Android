@@ -1,5 +1,6 @@
-* Tue October 30, 2018 - 6.39
+* Fri November 2, 2018 - 6.39
 - In-App messages may now be fetched from Responsys at app launch (see https://github.com/pushio/PushIOManager_Android/blob/master/README.md#upgrading-sdk-to-639).
+- Fixed issues related to fetching of messages in the Message Center.
 - Optimised internal database operations.
 
 * Fri September 28, 2018 - 6.38.1
