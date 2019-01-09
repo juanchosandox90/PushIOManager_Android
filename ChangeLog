@@ -1,5 +1,7 @@
 * Tue December 11, 2018 - 6.39.1
-- Added additional validations for the url used to display an In-App message.
+- Fixed an issue where the url of the In-App message WebView could be invoked from outside the Responsys SDK. The fix includes,
+    - Controlled access to the WebView component in the Responsys SDK, and,
+    - Additional validations for the url used to display an In-App message.
 
 * Fri November 2, 2018 - 6.39
 - In-App messages may now be fetched from Responsys at app launch (see https://github.com/pushio/PushIOManager_Android/blob/master/README.md#upgrading-sdk-to-639).
