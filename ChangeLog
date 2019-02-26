@@ -1,3 +1,11 @@
+* Tue February 26, 2019 - 6.40
+- Added new APIs for maintaining sessions for push conversions
+- Added APIs for reporting geofence and beacon events
+- Added support for title text in push notifications.
+- Fixed an issue with In-App messages and Rich Push notifications where the message was sometimes not displayed.
+- Fixed an issue with permissions where multiple app installation would fail if apps were signed with different certificates.
+- Fixed an issue with In-App messages where the rich content did not render correctly in some scenarios.
+
 * Tue February 12, 2019 - 6.39.2
 - Fixed NPE when `registerApp()` is called from two different threads simultaneously.
 
