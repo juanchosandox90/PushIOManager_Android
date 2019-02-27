@@ -2,7 +2,6 @@
 
 * [Integration Guide](https://docs.oracle.com/cloud/latest/marketingcs_gs/OMCFB/android/)
 
-
  
  
 ## Release Notes
@@ -204,6 +203,6 @@ If you followed the above steps and registration was successful but have not rec
 
 
 ## Contact
-* Support: [My Oracle Support] (http://support.oracle.com)
+* Support: [My Oracle Support](http://support.oracle.com)
 
 Copyright © 2019, Oracle Corporation and/or its affiliates. All rights reserved. Oracle and Java are registered trademarks of Oracle and/or its affiliates. Other names may be trademarks of their respective owners.
