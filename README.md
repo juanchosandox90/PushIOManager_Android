@@ -64,7 +64,7 @@ PushIOManager.getInstance(getApplicationContext()).trackEmailConversion(getInten
 The existing `trackEmailConversion(Intent)` API is recommended for a frictionless conversion experience for your email audience.
 
 #### New API for Maintaining Conversion Windows
-Responsys SDK supports tracking conversions (both push and cross-channel). Typically, a conversion session lasts until the app calls `resetEID()` or `resetEngagementContext()`. While this satifies most use-cases, there are scenarios where the app would want a conversion session to last a pre-defined amount of time, say, 3 days. In such cases, it is difficult to calculate the age of the conversion session.  With this release, we have added a new API for getting the timestamp of when the app was opened via Responsys Push or Email campaigns. 
+Responsys SDK supports tracking conversions (both push and cross-channel). Typically, a conversion session lasts until the app calls `resetEID()` or `resetEngagementContext()`. While this satifies most use-cases, there are scenarios where the app would want a conversion session to last a pre-defined amount of time, say, 3 days. In such cases, it is difficult to calculate the age of the conversion session.  With this release, we have added a new API for getting the timestamp of when the app was opened via a Responsys Push or Email campaign. 
 
 ```java
 PushIOManager.getInstance(this).getEngagementTimestamp();
