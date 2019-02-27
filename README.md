@@ -33,7 +33,7 @@ This permission must be assigned to the `PushIOMessageViewActivity` as follows,
        </intent-filter>
 </activity>
 ```
-The permission will ensure that only your app (or apps signed with same certificate as your app) can display the rich HTML content.
+The permission will ensure that only your app (or apps signed with the same certificate as your app) may launch the `WebView` to display the HTML content.
 
 
 #### New APIs for Geofence and Beacon Events
@@ -51,7 +51,7 @@ If you currently use a solution for tracking geofences/beacons, it is now possib
 
 
 #### New API for Cross-channel Conversions
-For the users of our [Cross-channel Conversion Tracking](https://docs.oracle.com/cloud/latest/marketingcs_gs/OMCFB/android/xchannel-conversions/)  feature, we have added a new API that allows your app to handle the deeplinks/weblinks instead of the Responsys SDK.
+For the users of our [Cross-channel Conversion Tracking](https://docs.oracle.com/cloud/latest/marketingcs_gs/OMCFB/android/xchannel-conversions/)  feature, we have added a new API that allows the app to handle the deeplinks/weblinks instead of the Responsys SDK.
 
 ```java
 PushIOManager.getInstance(getApplicationContext()).trackEmailConversion(getIntent(), new PIODeepLinkListener() {
