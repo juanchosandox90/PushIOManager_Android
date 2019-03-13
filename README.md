@@ -82,8 +82,15 @@ PushIOManager.getInstance(getApplicationContext());
 PushIOManager.getInstance(MainActivity.this);
 ```
 
+#### ProGuard 
+If your app uses ProGuard, you may get some build-time warnings and/or runtime `ClassNotFoundException` related to the Responsys SDK. To work around this issue, add the following rules to your `proguard-rules.pro` file,
 
-
+```text
+# Rules for Responsys SDK
+-keep class com.pushio.manager.** { *; }
+-keep interface com.pushio.manager.** { *; }
+-dontwarn com.pushio.manager.**
+```
 
 ### Upgrading SDK to 6.39
 #### New API for In-App Messaging
