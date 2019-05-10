@@ -1,8 +1,96 @@
 ## PushIOManager for Android 
 
-* [Integration Guide](http://docs.push.io)
+* [Integration Guide](https://docs.oracle.com/cloud/latest/marketingcs_gs/OMCFB/android/)
 
+ 
+ 
 ## Release Notes
+
+### Upgrading SDK to 6.40
+#### New Permission for Displaying In-App Message and Rich Push message
+Responsys SDK uses a `WebView` component to display the In-App and Rich Push messages. To improve the security of this component, we have added a new permission that is required to be declared in the `AndroidManifest` file,
+
+```xml
+<uses-permission android:name="${applicationId}.permission.RSYS_SHOW_IAM"/>
+
+<permission
+        android:name="${applicationId}.permission.RSYS_SHOW_IAM"
+        android:protectionLevel="signature" />
+```
+This permission must be assigned to the `PushIOMessageViewActivity` as follows,
+
+```xml
+<activity
+       android:name="com.pushio.manager.iam.ui.PushIOMessageViewActivity"
+       android:theme="@android:style/Theme.Translucent.NoTitleBar"
+       android:permission="${applicationId}.permission.RSYS_SHOW_IAM">
+       <intent-filter>
+          <action android:name="android.intent.action.VIEW" />
+	  <category android:name="android.intent.category.BROWSABLE" />
+          <category android:name="android.intent.category.DEFAULT" />
+	  <data android:scheme="pio-YOUR_APP_ID" />
+       </intent-filter>
+</activity>
+```
+The permission will ensure that only your app (or apps signed with the same certificate as your app) may launch the `WebView` to display the HTML content.
+
+
+#### New APIs for Geofence and Beacon Events
+With the release of 6.40 SDK, we have introduced new APIs for reporting geofence and beacon related events back to Responsys.
+
+```java
+onGeoRegionEntered(PIOGeoRegion region, PIORegionCompletionListener completionListener);
+onGeoRegionExited (PIOGeoRegion region, PIORegionCompletionListener completionListener);
+
+onBeaconRegionEntered(PIOBeaconRegion region, PIORegionCompletionListener completionListener);
+onBeaconRegionExited (PIOBeaconRegion region, PIORegionCompletionListener completionListener);
+```
+If you currently use a solution for tracking geofences/beacons, it is now possible to send the related event data to Responsys using these APIs.
+
+
+
+#### New API for Cross-channel Conversions
+For the users of our [Cross-channel Conversion Tracking](https://docs.oracle.com/cloud/latest/marketingcs_gs/OMCFB/android/xchannel-conversions/)  feature, we have added a new API that allows the app to handle the deeplinks/weblinks instead of the Responsys SDK.
+
+```java
+PushIOManager.getInstance(getApplicationContext()).trackEmailConversion(getIntent(), new PIODeepLinkListener() {
+   @Override
+   public void onDeepLinkReceived(String deeplinkUrl, String webLinkUrl) {
+   	// handle the deeplink / weblink
+   }
+});
+```
+The existing `trackEmailConversion(Intent)` API is recommended for a frictionless conversion experience for your email audience.
+
+#### New API for Maintaining Conversion Windows
+Responsys SDK supports tracking conversions (both push and cross-channel). Typically, a conversion session lasts until the app calls `resetEID()` or `resetEngagementContext()`. While this satifies most use-cases, there are scenarios where the app would want a conversion session to last a pre-defined amount of time, say, 3 days. In such cases, it is difficult to calculate the age of the conversion session.  With this release, we have added a new API for getting the timestamp of when the app was opened via a Responsys Push or Email campaign. 
+
+```java
+PushIOManager.getInstance(this).getEngagementTimestamp();
+```
+This API returns an ISO-8601 compatible timestamp String which allows the app developers to calculate the age of the conversion session and accordingly create custom conversion windows.
+
+
+#### Deprecations
+As part of the In-App message and Rich Push setup, we have been asking app developers to create/modify their `Application` class to extend our `PIOApplication` class. With the release of 6.40, this is no longer a mandatory step. The class `PIOApplication` has been deprecated. Just ensure that the SDK is instantiated with either the Application context or Activity context.
+
+```java
+PushIOManager.getInstance(getApplicationContext());
+
+// or
+
+PushIOManager.getInstance(MainActivity.this);
+```
+
+#### ProGuard 
+If your app uses ProGuard, you may get some build-time warnings and/or runtime `ClassNotFoundException` related to the Responsys SDK. To work around this issue, add the following rules to your `proguard-rules.pro` file,
+
+```text
+# Rules for Responsys SDK
+-keep class com.pushio.manager.** { *; }
+-keep interface com.pushio.manager.** { *; }
+-dontwarn com.pushio.manager.**
+```
 
 ### Upgrading SDK to 6.39
 #### New API for In-App Messaging
@@ -121,11 +209,7 @@ If you followed the above steps and registration was successful but have not rec
 
 
 
-## Other Resources
-* [Downloads + Documenation] (http://docs.push.io)
-* [Sign In / Sign Up] (https://manage.push.io)
-
 ## Contact
-* Support: [My Oracle Support] (http://support.oracle.com)
+* Support: [My Oracle Support](http://support.oracle.com)
 
-Copyright © 2016, Oracle Corporation and/or its affiliates. All rights reserved. Oracle and Java are registered trademarks of Oracle and/or its affiliates. Other names may be trademarks of their respective owners.
+Copyright © 2019, Oracle Corporation and/or its affiliates. All rights reserved. Oracle and Java are registered trademarks of Oracle and/or its affiliates. Other names may be trademarks of their respective owners.
