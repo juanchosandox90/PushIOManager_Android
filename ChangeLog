@@ -1,3 +1,6 @@
+* Fri May 10, 2019 - 6.40.1
+- Fixed an issue with storing the device token in scenarios where the token is received before the SDK is initialised.
+
 * Tue February 26, 2019 - 6.40
 - Added new APIs for maintaining sessions for push conversions
 - Added APIs for reporting geofence and beacon events
