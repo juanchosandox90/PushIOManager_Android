@@ -1,3 +1,7 @@
+* Mon May 27, 2019 - 6.41
+- Added new APIs to manage badge icons for Message Center.
+- Added new APIs to allow the apps to switch between multiple Responsys accounts at runtime.
+
 * Fri May 10, 2019 - 6.40.1
 - Fixed an issue with storing the device token in scenarios where the token is received before the SDK is initialised.
 
