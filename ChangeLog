@@ -1,3 +1,7 @@
+* Mon Oct 14, 2019 - 6.43
+- Added support for image carousel in push notifications.
+- Added support for location permission changes in Android 10.
+
 * Mon Aug 26, 2019 - 6.42
 - Added new APIs for apps handling push notifications (see https://docs.oracle.com/cloud/latest/marketingcs_gs/OMCFB/android/multiple-sdks/)
 - Fixed issue with custom sound not being played in Android 8.0 and above.
