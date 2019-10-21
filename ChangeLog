@@ -1,3 +1,6 @@
+* Mon Oct 21, 2019 - 6.43.1
+- Optimised SDK for improved app launch experience.
+
 * Mon Oct 14, 2019 - 6.43
 - Added support for image carousel in push notifications.
 - Added support for location permission changes in Android 10.
