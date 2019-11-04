@@ -1,3 +1,6 @@
+* Mon Nov 4, 2019 - 6.43.2
+- Fixed an issue with `registerApp()` where, in some cases, the data sent to the server was not accurate.
+
 * Mon Oct 21, 2019 - 6.43.1
 - Optimised SDK for improved app launch experience.
 
