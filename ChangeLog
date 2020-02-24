@@ -1,3 +1,10 @@
+* Mon Feb 24, 2020 - 6.44
+- Migrated to AndroidX.
+- Fixed an issue with push notifications not being displayed on few devices when app is in background.
+- Fixed an issue with incorrect timezone value being sent to the server.
+- Fixed an issue with Message Center messages not being fetched on app launch in some scenarios.
+- Fixed an issue with `PushIOManager.fetchRichContentForMessage()` callback not returning the correct `messageId`.
+
 * Mon Nov 4, 2019 - 6.43.2
 - Fixed an issue with `registerApp()` where, in some cases, the data sent to the server was not accurate.
 
