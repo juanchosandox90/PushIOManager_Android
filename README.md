@@ -11,7 +11,7 @@
 
 With this release, we have migrated from the Android Support libraries to AndroidX.
 
-If your app uses the `android.support.xx` dependencies, please migrate them to AndroidX  to use this version of the SDK.
+If your app uses the `android.support.*` dependencies, please migrate them to AndroidX  to use this version of the SDK.
 
 Learn more about migrating your App to AndroidX [here](https://developer.android.com/jetpack/androidx/migrate).
 
